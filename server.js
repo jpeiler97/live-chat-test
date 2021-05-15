@@ -11,6 +11,7 @@ const sequelize = require('./config/connection');
 const hbs = exphbs.create({});
 
 const routes = require('./controllers');
+const { Message } = require('./models');
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
@@ -22,8 +23,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 sequelize.sync({ force: false });
 
 io.on('connection', (socket) => {
-	socket.on('message', (msg) => {
+	socket.on('message', async (msg) => {
 		console.log(msg);
+		try {
+			await Message.create({
+				name: msg.name,
+				text: msg.text
+			});
+		} catch (err) {
+			console.log(err);
+		}
 		io.emit('chatMessage', msg);
 	});
 	console.log('a user connected');

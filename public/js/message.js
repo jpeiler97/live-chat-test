@@ -1,15 +1,17 @@
-function addMessages(message) {
+const addMessages = async (req, res) => {
+	const name = req.name;
+	const text = req.text;
+
 	$('#messages').append(`
-      <h4> ${message.name} </h4>
-      <p>  ${message.text} </p>`);
-}
+      <h4> ${name} </h4>
+      <p>  ${text} </p>`);
+};
 
 const sendMessage = async (event) => {
 	event.preventDefault();
 
 	const name = document.querySelector('#name').value;
 	const text = document.querySelector('#message').value;
-
 	socket.emit('message', { name, text });
 };
 

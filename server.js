@@ -22,6 +22,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 sequelize.sync({ force: false });
 
 io.on('connection', (socket) => {
+	socket.on('message', (msg) => {
+		console.log(msg);
+		io.emit('chatMessage', msg);
+	});
 	console.log('a user connected');
 });
 

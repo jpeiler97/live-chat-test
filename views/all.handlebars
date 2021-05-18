@@ -12,7 +12,10 @@
  <button id="send" class="btn btn-success">Send</button>
  </div>
  <div id="messages">
- 
+ {{#each messages as |message|}}
+ <h4> {{message.name}} </h4>
+<p>  {{message.text}} </p>
+ {{/each}}
 </div>
 </div>
 

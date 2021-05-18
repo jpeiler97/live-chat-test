@@ -22,7 +22,7 @@ const sendMessage = async (event) => {
 	const name = document.querySelector('#name').value;
 	const text = document.querySelector('#message').value;
 	try {
-		const response = await fetch('/', {
+		const response = await fetch('/api/messages', {
 			method: 'POST',
 			body: JSON.stringify({ name, text }),
 			headers: { 'Content-Type': 'application/json' }

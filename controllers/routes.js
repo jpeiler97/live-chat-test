@@ -15,19 +15,4 @@ router.get('/', async (req, res) => {
 	}
 });
 
-router.post('/', (req, res, next) => {
-	const io = res.locals['socketio'];
-	try {
-		console.log('request body ' + req.body);
-		const messageData = Message.create({
-			name: req.body.name,
-			text: req.body.text
-		});
-		res.status(200).json(messageData);
-	} catch (err) {
-		console.log(err);
-		res.status(500).json(err);
-	}
-});
-
 module.exports = router;
